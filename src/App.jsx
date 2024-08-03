@@ -15,7 +15,12 @@ function App() {
   const options = Object.keys(currencyInfo)
 
   const convertAmount  = () => {
-    setonvertedAmount(amount * currencyInfo[toCurrency])
+    setonvertedAmount(Math.floor(amount * currencyInfo[toCurrency]))
+  }
+
+  const swap = () => {
+    setFromCurrency(toCurrency)
+    setToCurrency(fromCurrency)
   }
 
   return (
@@ -42,7 +47,7 @@ function App() {
            
               <button
               className='absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5'
-              // onClick={swap}
+              onClick={swap}
               >Swap</button>
               <div className='w-full mb-1'>
                 <InputBox
