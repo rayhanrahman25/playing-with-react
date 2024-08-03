@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import InputBox from './components/InputBox'
 import UseCurrencyInfo from './hooks/useCurrencyInfo'
 import './App.css'
