@@ -1,7 +1,7 @@
 
 import React, {useId} from "react"
 
-function InputBox ({label, amount, currency, onAmountChange, onCurrencyChange, currencyOptions, amountDisabled, currencyDisbled, className}) {
+function InputBox ({label, amount, selectedCurrency , onAmountChange, onCurrencyChange, currencyOptions, amountDisabled, currencyDisbled, className}) {
     const id = useId
 
     return (
@@ -15,7 +15,7 @@ function InputBox ({label, amount, currency, onAmountChange, onCurrencyChange, c
             placeholder='Amount'
             disabled={amountDisabled}
             value={amount}
-            onChange={(e) => onAmountChange && onAmountChange(Number(e.target.value))}
+            onChange={(e) => { onAmountChange && onAmountChange(e.target.value)}}
              />
         </div>
         <div className='w-1/2 flex flex-wrap justify-end text-right'>
@@ -26,7 +26,7 @@ function InputBox ({label, amount, currency, onAmountChange, onCurrencyChange, c
         disabled={currencyDisbled}
         >
           {currencyOptions.map((currency) => (
-                <option key={currency} value={currency}>{currency}</option>
+                <option key={currency} value={currency} selected={currency == selectedCurrency}>{currency}</option>
             ))}
         </select>
         </div>
