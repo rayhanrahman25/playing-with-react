@@ -8,6 +8,7 @@ import Layout from './Layout.jsx'
 import User from './components/User.jsx'
 import './index.css'
 import Github, { gitHubInfosLoader } from './components/Github.jsx'
+import NotFound from './components/NotFound.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,9 +17,10 @@ const router = createBrowserRouter(
         <Route path='about' element={<About/>}></Route>
         <Route path='contact' element={<Contact/>}></Route>
         <Route path='user' element={<User/>}>
-          <Route path=":userName"/>
+          <Route path=":userName" />
         </Route>
         <Route path='github' loader={gitHubInfosLoader} element={<Github/>}></Route>
+        <Route path='/*' element={<NotFound/>}></Route>
     </Route>
   )
 )
