@@ -2,42 +2,33 @@
 
 import { useEffect, useState } from 'react'
 import './App.css'
-import ThemeBtn from './components/Button'
-import Card from './components/Card'
-import { ThemeProvider } from './contexts/ThemeProvider'
+import { todoProvider } from './contexts';
 
 function App() {
-  const [themeMode, setThemeMode] = useState('light');
 
-  const darkTheme = () => {
-    setThemeMode('dark');
+  const [todos, setTodos] = useState("")
+
+
+  const addTodo = (todo) => {
+      setTodos((prev) => [{id: Date.now(), ...todo}, ...prev])
   }
-
-  const lightTheme = () => {
-    setThemeMode('light')
-  }
-
-  useEffect( () => {
-    document.querySelector('html').classList.remove('dark', "light")
-    document.querySelector('html').classList.add(themeMode)
-  }, [themeMode])
 
   return (
-    <>
-    <ThemeProvider value={{themeMode, darkTheme, lightTheme}}>
-      <div className="flex flex-wrap min-h-screen items-center">
-          <div className="w-full">
-              <div className="w-full max-w-sm mx-auto flex justify-end mb-4">
-                  <ThemeBtn />
+    <todoProvider value={{todos, addTodo, updateTodo, deleteTodo, toggleComplete}}>
+        <div className="bg-[#172842] min-h-screen py-8">
+          <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
+              <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
+              <div className="mb-4">
+                  {/* Todo form goes here */} 
+                 
               </div>
-
-              <div className="w-full max-w-sm mx-auto">
-                  <Card />
+              <div className="flex flex-wrap gap-y-3">
+                  {/*Loop and Add TodoItem here */}
+                  
               </div>
           </div>
-      </div>
-      </ThemeProvider>
-    </>
+        </div>
+    </todoProvider>
   )
 }
 
