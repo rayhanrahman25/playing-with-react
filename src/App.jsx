@@ -14,7 +14,15 @@ function App() {
   }
 
   const updateTodo = (id, todo) => {
-      setTodos((prev) => [{}, ...prev])
+      setTodos((prev) => prev.map((prevItem) => (prevItem.id === todo.id) ? todo : prevItem) )
+  }
+
+  const deleteTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+  }
+
+  const toggleComplete = (id) => {
+    setTodos((prev) => prev.map((prevTodo) => prevTodo.id === id ?  {...prevTodo, complete: !prevTodo.complete} : prevTodo))
   }
 
   return (
