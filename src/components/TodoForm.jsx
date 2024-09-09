@@ -9,6 +9,7 @@ export default function TodoForm() {
       e.preventDefault()
       if(!todo) return
       addTodo({todo, completed: true});
+      setTodo("")
   }
 
   return (
