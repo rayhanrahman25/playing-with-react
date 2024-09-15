@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { UseTodo } from '../contexts';
 
 function TodoItem({ todo }) {
-  const { toggleComplete } = UseTodo();
+  const { toggleComplete, updateTodo} = UseTodo();
   const [isTodoEditable, setIsTodoEditable] = useState(false);
-  const [todoMsg, setTodoMsg] = useState("");
+  const [todoMsg, setTodoMsg] = useState(todo.todo);
+
+  const editTodo = () => {
+    updateTodo(todo.id, {...todo, todo: todoMsg})
+    setIsTodoEditable(false)
+  }
 
   const handleCheckboxChange = () => {
-    toggleComplete(todo.id);  // Make sure this function updates the todo list properly
+    toggleComplete(todo.id);
   };
 
   return (
@@ -29,8 +34,14 @@ function TodoItem({ todo }) {
       />
       <button
         className='inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50'
-        onClick={() => setIsTodoEditable((prev) => !prev)}  // Toggle editable state
-      >
+        onClick={
+        () => {
+          if(todo.completed) return
+          if(isTodoEditable){
+            editTodo()
+          }else setIsTodoEditable((prev) => !prev)
+        } 
+        }>
         {isTodoEditable === true ? "📁" : "✏️"}
       </button>
       <button
