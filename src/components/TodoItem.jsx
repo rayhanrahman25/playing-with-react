@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UseTodo } from '../contexts';
 
 function TodoItem({ todo }) {
-  const { toggleComplete, updateTodo} = UseTodo();
+  const { toggleComplete, updateTodo, deleteTodo} = UseTodo();
   const [isTodoEditable, setIsTodoEditable] = useState(false);
   const [todoMsg, setTodoMsg] = useState(todo.todo);
 
@@ -14,6 +14,10 @@ function TodoItem({ todo }) {
   const handleCheckboxChange = () => {
     toggleComplete(todo.id);
   };
+
+  const removeTodo = () => {
+    deleteTodo(todo.id)
+  }
 
   return (
     <div
@@ -27,7 +31,7 @@ function TodoItem({ todo }) {
       />
       <input
         type="text"
-        className={`border outline-none w-full bg-transparent rounded-lg`}
+        className={`border outline-none w-full bg-transparent rounded-lg text-white`}
         value={todoMsg}
         readOnly={!isTodoEditable}
         onChange={(e) => setTodoMsg(e.target.value)}
@@ -46,6 +50,11 @@ function TodoItem({ todo }) {
       </button>
       <button
         className='inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0'
+        onClick={
+          () => {
+            removeTodo()
+          }
+        }
       >
         ❌
       </button>
